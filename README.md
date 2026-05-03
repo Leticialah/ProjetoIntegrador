@@ -104,4 +104,32 @@ Exemplo de gestos detectados:
 - Horário / Anti-horário
 - Acenar
 
-O código base encontra-se em:
+
+---
+
+## 🚀 Próximos Passos
+
+- integração completa hardware + firmware
+- implementação dos efeitos visuais
+- testes finais do sistema
+- validação até o PC3
+
+---
+
+## 👨‍💻 Equipe
+
+- Letícia Lavigne  
+- Pedro Henrique  
+- Kauã Araújo  
+- Iuri Mariante  
+- João Gabriel  
+- Cauê Santana  
+
+---
+
+## 📚 Referências
+
+- ESP32 Datasheet
+- Documentação Arduino ESP32
+- Biblioteca PAJ7620
+- Especificação I2C (NXP)
