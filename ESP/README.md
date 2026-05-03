@@ -1,52 +1,31 @@
-# ESP32 + APDS-9960 - Detecção de Gestos
+# Sistema Interativo de Holograma Controlado por Gestos
 
-Projeto simples para testar detecção de gestos com ESP32 e sensor APDS-9960 usando a biblioteca da SparkFun.
+## 📌 Descrição
+Projeto de um sistema embarcado que utiliza o sensor de gestos PAJ7620 e um ESP32 para controlar a exibição de imagens em um dispositivo externo (iPad), criando um efeito de holograma.
 
-## Ligações
+## 🧠 Funcionamento
+1. O sensor PAJ7620 detecta gestos do usuário
+2. O ESP32 processa os dados via I2C
+3. O sistema envia comandos via Wi-Fi/Bluetooth
+4. O iPad exibe as imagens correspondentes
 
-APDS9960 -> ESP32
+## 🔧 Hardware Utilizado
+- ESP32-C3 DevKit
+- Sensor de gestos PAJ7620
+- Resistores de pull-up (4.7kΩ)
+- Capacitor de desacoplamento (100nF)
+- Conectores (2.54mm)
 
-- VCC -> 3V3
-- GND -> GND
-- SDA -> GPIO 21
-- SCL -> GPIO 22
-- INT -> GPIO 25
+## 🖥️ PCB
+O layout da placa foi desenvolvido no KiCad, contendo:
+- plano de GND
+- roteamento das trilhas principais
+- organização dos blocos (alimentação, sensor, processamento)
 
-## Requisitos
+## 📁 Estrutura
+- `/kicad`: arquivos do projeto eletrônico
+- `/docs`: relatório e imagens
+- `/firmware`: código do ESP32
 
-- ESP32 Dev Module
-- Sensor APDS-9960
-- PlatformIO ou Arduino IDE
-- Biblioteca SparkFun APDS-9960
-
-## Configuração
-
-No PlatformIO, use:
-
-- Board: `esp32dev`
-- Framework: `arduino`
-- Porta: `COM8`
-
-## Funcionamento
-
-O sensor usa o pino `INT` para avisar quando um gesto foi detectado.  
-O ESP32 lê esse evento e imprime no monitor serial:
-
-- UP
-- DOWN
-- LEFT
-- RIGHT
-- NEAR
-- FAR
-
-## Monitor Serial
-
-Velocidade:
-115200
-
-## Observação importante
-
-Se aparecer erro na inicialização do sensor, o problema pode estar em:
-- alimentação
-- fiação I2C
-- incompatibilidade do módulo com a biblioteca
+## 👨‍💻 Autor
+Seu nome aqui
