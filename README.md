@@ -1,135 +1,249 @@
 # Sistema Interativo de Holograma Controlado por Gestos
 
-## 📌 Visão Geral
+Projeto acadêmico de um sistema **touchless** para controle de uma interface holográfica por gestos manuais.
 
-Este projeto consiste no desenvolvimento de um sistema embarcado capaz de interpretar gestos manuais e convertê-los em comandos para controle de efeitos visuais, criando uma experiência de interação sem contato físico.
-
-O sistema utiliza um sensor de gestos para capturar movimentos da mão, um microcontrolador para processar os dados e um dispositivo externo para exibir o efeito holográfico.
+O sistema utiliza um **ESP32-C3 SuperMini**, um sensor gestual **PAJ7620** e comunicação **Bluetooth BLE**. O ESP32-C3 funciona como um teclado Bluetooth e envia comandos para um iPad, que reproduz vídeos ou animações de acordo com o gesto detectado.
 
 ---
 
-## 🧠 Arquitetura do Sistema
+## Objetivo
 
-O sistema foi estruturado em três blocos principais:
+Desenvolver um sistema holográfico interativo capaz de reconhecer gestos manuais e controlar conteúdos multimídia em tempo real, evitando contato físico direto com telas.
 
-### 🔹 1. Aquisição de Dados
-- Sensor: **PAJ7620**
-- Responsável pela detecção de gestos manuais
+A proposta busca:
 
-### 🔹 2. Processamento
-- Microcontrolador: **ESP32**
-- Executa leitura via I2C e interpreta os gestos
-
-### 🔹 3. Saída / Atuação
-- Dispositivo externo (ex: iPad)
-- Responsável pela exibição dos efeitos visuais (holograma)
-
-Essa arquitetura segue o modelo clássico de sistemas embarcados:  
-**Entrada → Processamento → Saída** :contentReference[oaicite:1]{index=1}
+- reduzir o contato com superfícies compartilhadas;
+- criar uma interface mais intuitiva;
+- demonstrar integração entre hardware, firmware, BLE e interface visual;
+- aplicar conceitos de sistemas embarcados e comunicação I2C.
 
 ---
 
-## 🔄 Funcionamento do Sistema
+## Arquitetura do sistema
 
-1. O usuário realiza um gesto com a mão  
-2. O sensor PAJ7620 detecta o movimento  
-3. O ESP32 lê os dados via I2C  
-4. O firmware interpreta o gesto  
-5. Um comando é gerado  
-6. O sistema ativa um efeito visual no holograma  
+O projeto é dividido em três blocos principais:
 
----
+| Bloco | Componente | Função |
+|---|---|---|
+| Entrada | PAJ7620 | Detecta os gestos da mão |
+| Processamento | ESP32-C3 SuperMini | Lê o sensor, interpreta o gesto e envia comando BLE |
+| Saída | iPad | Reproduz o vídeo/animação holográfica |
 
-## ⚙️ Decisões de Projeto
+Fluxo de funcionamento:
 
-### ✔ Substituição do Sensor
-O sensor inicial (APDS-9960) foi substituído pelo **PAJ7620** devido a:
-- maior precisão
-- melhor estabilidade
-- menor sensibilidade à iluminação :contentReference[oaicite:2]{index=2}
-
----
-
-### ✔ Comunicação
-- Protocolo: **I2C**
-- Linhas: SDA e SCL  
-- Vantagem: menos fios e integração simples :contentReference[oaicite:3]{index=3}
+1. O usuário realiza um gesto próximo ao sensor.
+2. O PAJ7620 identifica o movimento.
+3. O ESP32-C3 lê o gesto via I2C.
+4. O firmware interpreta o comando.
+5. O ESP32-C3 envia uma tecla via BLE Keyboard.
+6. O iPad recebe a tecla.
+7. A interface HTML reproduz o vídeo correspondente.
 
 ---
 
-### ✔ Nível de Tensão
-- Sistema opera em **3.3V**
-- Compatibilidade direta entre ESP32 e PAJ7620  
-- Sem necessidade de conversor de nível lógico :contentReference[oaicite:4]{index=4}
+## Componentes utilizados
+
+| Componente | Função |
+|---|---|
+| ESP32-C3 SuperMini | Microcontrolador principal |
+| PAJ7620 | Sensor de reconhecimento de gestos |
+| iPad | Reprodução holográfica |
+| Protoboard | Montagem experimental |
+| PCB preliminar | Organização física da arquitetura eletrônica |
+| Cabo USB-C | Alimentação e gravação |
 
 ---
 
-## 🔌 Hardware Utilizado
+## Ligações elétricas
 
-- ESP32-C3 DevKitM-1
-- Sensor de gestos PAJ7620
-- Resistores pull-up (4.7kΩ)
-- Capacitor de desacoplamento (100nF)
-- Conectores 2.54mm
-- Fonte 5V (USB)
+| PAJ7620 | ESP32-C3 SuperMini |
+|---|---|
+| VCC | 3V3 |
+| GND | GND |
+| SDA | GPIO 6 |
+| SCL | GPIO 7 |
 
----
-
-## 🖥️ PCB
-
-A placa foi projetada no **KiCad** e inclui:
-
-- plano de GND
-- roteamento otimizado
-- separação de blocos
-- proteção da área da antena do ESP32
+O sistema utiliza alimentação via USB-C. O ESP32-C3 recebe 5V pela porta USB e fornece 3.3V para o sensor.
 
 ---
 
-## 💻 Firmware
+## Bibliotecas utilizadas
 
-O firmware realiza:
-- inicialização do barramento I2C
-- configuração do sensor
-- leitura contínua dos gestos
-- interpretação dos dados
+No firmware foram usadas as seguintes bibliotecas:
 
-Exemplo de gestos detectados:
-- Direita
-- Esquerda
-- Cima
-- Baixo
-- Aproximar
-- Afastar
-- Horário / Anti-horário
-- Acenar
+```cpp
+#include <Wire.h>
+#include "paj7620.h"
+#include <BleKeyboard.h>
+```
 
+| Biblioteca | Função |
+|---|---|
+| Wire.h | Comunicação I2C |
+| paj7620.h | Inicialização e leitura do sensor PAJ7620 |
+| BleKeyboard.h | Comunicação Bluetooth BLE como teclado |
 
 ---
 
-## 🚀 Próximos Passos
+## Mapeamento dos gestos
 
-- integração completa hardware + firmware
-- implementação dos efeitos visuais
-- testes finais do sistema
-- validação até o PC3
-
----
-
-## 👨‍💻 Equipe
-
-- Letícia Lavigne  
-- Pedro Henrique  
-- Kauã Araújo  
-- Iuri Mariante  
-- João Gabriel  
-- Cauê Santana  
+| Gesto detectado | Tecla enviada |
+|---|---|
+| Direita | 1 |
+| Esquerda | 2 |
+| Cima | 3 |
+| Baixo | 4 |
+| Aproximar | 5 |
+| Afastar | 6 |
+| Rotação horária | 7 |
+| Rotação anti-horária | 8 |
 
 ---
 
-## 📚 Referências
+## Como usar com PlatformIO no VS Code
 
-- ESP32 Datasheet
-- Documentação Arduino ESP32
-- Biblioteca PAJ7620
-- Especificação I2C (NXP)
+1. Instale o **VS Code**.
+2. Instale a extensão **PlatformIO IDE**.
+3. Abra a pasta raiz deste repositório.
+4. Conecte o ESP32-C3 SuperMini ao computador.
+5. Confira o arquivo `platformio.ini`.
+6. Faça upload do firmware.
+7. Abra o Monitor Serial em `115200 baud`.
+8. No iPad, pareie com o dispositivo Bluetooth:
+
+```txt
+Controle Gestos ESP32
+```
+
+---
+
+## Como usar com Arduino IDE
+
+1. Abra o arquivo:
+
+```txt
+firmware/main.ino
+```
+
+2. Instale as bibliotecas necessárias.
+3. Selecione a placa **ESP32C3 Dev Module**.
+4. Selecione a porta COM correta.
+5. Faça upload.
+6. Abra o Monitor Serial em `115200 baud`.
+
+---
+
+## Interface no iPad
+
+A interface de vídeo está em:
+
+```txt
+interface_holografica/videos_ipad.html
+```
+
+Ela escuta as teclas `1` a `8` e troca o vídeo conforme o gesto recebido.
+
+Os vídeos devem ser colocados na pasta:
+
+```txt
+interface_holografica/videos/
+```
+
+com os nomes:
+
+```txt
+video1.mp4
+video2.mp4
+video3.mp4
+video4.mp4
+video5.mp4
+video6.mp4
+video7.mp4
+video8.mp4
+```
+
+---
+
+## Estrutura do repositório
+
+```txt
+ProjetoIntegrador/
+│
+├── firmware/
+│   ├── main.ino
+│   ├── ble_control/
+│   ├── gesture_read/
+│   ├── libraries/
+│   └── src/
+│
+├── hardware/
+│   ├── esquematico/
+│   ├── pcb/
+│   ├── pcb_3d/
+│   └── kicad/
+│
+├── docs/
+│   ├── PC1/
+│   ├── PC2/
+│   ├── PC3/
+│   └── referencias/
+│
+├── imagens/
+│   ├── pcb/
+│   ├── testes/
+│   ├── bluetooth/
+│   └── holograma/
+│
+├── interface_holografica/
+│   ├── videos_ipad.html
+│   └── videos/
+│
+├── src/
+│   └── main.cpp
+│
+├── platformio.ini
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Resultados atuais
+
+Até o PC3, o sistema apresenta:
+
+- leitura funcional do sensor PAJ7620;
+- comunicação I2C validada;
+- comunicação Bluetooth BLE funcional;
+- reconhecimento de múltiplos gestos;
+- envio de comandos para o iPad;
+- início da reprodução holográfica controlada por gestos;
+- PCB preliminar desenvolvida no KiCad;
+- modelagem 3D frontal e traseira da PCB.
+
+---
+
+## Limitações atuais
+
+- reprodução holográfica ainda em refinamento;
+- PCB em evolução incremental;
+- sensibilidade parcial à iluminação ambiente;
+- necessidade de sincronização final entre gesto e vídeo;
+- validação final prevista para o PC4.
+
+---
+
+## Equipe
+
+- Letícia Lavigne Guedes Germano
+- Pedro Henrique Alves Castello Branco
+- Kauã da Silva Araújo
+- Iuri Costa Mariante
+- João Gabriel de Souza
+- Cauê Lovis Santana
+
+---
+
+## Licença
+
+Projeto acadêmico desenvolvido para fins educacionais.
