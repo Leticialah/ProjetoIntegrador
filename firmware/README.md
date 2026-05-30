@@ -51,16 +51,16 @@ A proposta busca reduzir a necessidade de interação direta com telas touchscre
 
 # 🖐️ Gestos Reconhecidos
 
-| Gesto                | Comando            |
-| -------------------- | ------------------ |
-| Direita              | Próximo vídeo      |
-| Esquerda             | Vídeo anterior     |
-| Cima                 | Avançar            |
-| Baixo                | Retroceder         |
-| Aproximar            | Controle adicional |
-| Afastar              | Controle adicional |
-| Rotação horária      | Função especial    |
-| Rotação anti-horária | Função especial    |
+| Gesto                |
+| -------------------- |
+| Direita              |
+| Esquerda             |
+| Cima                 |
+| Baixo                |
+| Aproximar            |
+| Afastar              |
+| Rotação horária      |
+| Rotação anti-horária |
 
 ---
 
