@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1086</width>
+    <height>648</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AutoAtendimento Hospitalar</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">
+QWidget {
+    background-color: #F5F7FA;
+    font-family: Segoe UI, Arial;
+    color: #1F2937;
+}
+QLabel#lblTitulo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0F172A;
+}
+QLabel#lblSubtitulo {
+    font-size: 15px;
+    color: #475569;
+}
+QLabel#lblSenha {
+    font-size: 34px;
+    font-weight: 700;
+    color: #0F766E;
+    background-color: #FFFFFF;
+    border: 2px solid #CBD5E1;
+    border-radius: 12px;
+    padding: 18px;
+}
+QLabel#lblStatus, QLabel#lblESP32, QLabel#lblPainelEquipe {
+    font-size: 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    padding: 10px;
+}
+QPushButton {
+    background-color: #0F766E;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 14px;
+}
+QPushButton:hover {
+    background-color: #115E59;
+}
+QPushButton#btnEncerrar {
+    background-color: #B91C1C;
+}
+QPushButton#btnEncerrar:hover {
+    background-color: #991B1B;
+}
+QFrame#cardPrincipal, QFrame#cardStatus {
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 18px;
+}
+    </string>
+   </property>
+   <layout class="QVBoxLayout" name="layoutRaiz">
+    <property name="leftMargin">
+     <number>34</number>
+    </property>
+    <property name="topMargin">
+     <number>28</number>
+    </property>
+    <property name="rightMargin">
+     <number>34</number>
+    </property>
+    <property name="bottomMargin">
+     <number>28</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="lblTitulo">
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>AUTOATENDIMENTO HOSPITALAR</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lblSubtitulo">
+      <property name="text">
+       <string>Para sua segurança, não toque o painel. Para selecionar, movimente as mãos e mantenha a seta sobre a opção desejada!</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutConteudo">
+      <property name="spacing">
+       <number>24</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="cardPrincipal">
+        <property name="minimumSize">
+         <size>
+          <width>560</width>
+          <height>430</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <layout class="QVBoxLayout" name="layoutBotoes">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <property name="leftMargin">
+          <number>30</number>
+         </property>
+         <property name="topMargin">
+          <number>30</number>
+         </property>
+         <property name="rightMargin">
+          <number>30</number>
+         </property>
+         <property name="bottomMargin">
+          <number>30</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="btnConfirmar">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>72</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Confirmar Consulta</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSenha">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>72</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Gerar Senha</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnInfo">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>72</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Informações</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnEncerrar">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>72</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Encerrar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="cardStatus">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>430</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <layout class="QVBoxLayout" name="layoutStatus">
+         <property name="spacing">
+          <number>18</number>
+         </property>
+         <property name="leftMargin">
+          <number>24</number>
+         </property>
+         <property name="topMargin">
+          <number>28</number>
+         </property>
+         <property name="rightMargin">
+          <number>24</number>
+         </property>
+         <property name="bottomMargin">
+          <number>28</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="lblSenha">
+           <property name="text">
+            <string>Senha: ---</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblStatus">
+           <property name="text">
+            <string>Status: aguardando seleção...</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblESP32">
+           <property name="text">
+            <string>ESP32: aguardando conexão</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblPainelEquipe">
+           <property name="text">
+            <string>Painel da equipe: última senha ---</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1086</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAutoAtendimento">
+    <property name="title">
+     <string>AutoAtendimento</string>
+    </property>
+   </widget>
+   <addaction name="menuAutoAtendimento"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
