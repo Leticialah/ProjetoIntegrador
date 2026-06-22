@@ -1,96 +1,109 @@
 # Sistema de Autoatendimento Sem Toque com Reconhecimento de Gestos
 
-Projeto acadêmico desenvolvido na disciplina de Projeto Integrador com o objetivo de implementar um sistema de autoatendimento sem contato físico utilizando visão computacional, comunicação serial, sistemas embarcados e Bluetooth Low Energy (BLE).
+Projeto desenvolvido na disciplina de Projeto Integrador com o objetivo de implementar um sistema de autoatendimento touchless utilizando visão computacional, interface gráfica e comunicação embarcada.
 
-O sistema permite que o usuário navegue por uma interface gráfica utilizando apenas gestos das mãos detectados por câmera, eliminando a necessidade de interação direta com telas ou botões físicos.
-
----
-
-## Objetivo
-
-Desenvolver um sistema de autoatendimento touchless capaz de reconhecer gestos manuais em tempo real para seleção e confirmação de senhas, integrando visão computacional, interface gráfica e comunicação embarcada.
-
-A proposta busca:
-
-* reduzir o contato com superfícies compartilhadas;
-* tornar o processo de atendimento mais acessível e intuitivo;
-* demonstrar a integração entre software e hardware;
-* aplicar conceitos de visão computacional e sistemas embarcados;
-* validar a comunicação entre aplicação desktop, ESP32 e dispositivos móveis.
+O sistema permite que usuários realizem a seleção de opções e a geração de senhas através de gestos manuais detectados por uma câmera, eliminando a necessidade de contato físico com telas ou botões.
 
 ---
 
-## Arquitetura do Sistema
+# Objetivo
 
-O projeto é dividido em quatro blocos principais:
+Desenvolver um sistema de autoatendimento sem toque capaz de:
 
-| Bloco         | Componente                | Função                                             |
-| ------------- | ------------------------- | -------------------------------------------------- |
-| Entrada       | Webcam + MediaPipe        | Detecta e interpreta os gestos da mão              |
-| Processamento | Aplicação Python          | Processa os landmarks e identifica os comandos     |
-| Interface     | Qt                        | Gerencia a interface gráfica e a geração de senhas |
-| Comunicação   | ESP32-C3 Super Mini + BLE | Recebe a senha e a transmite para o celular        |
-
-### Fluxo de Funcionamento
-
-1. O usuário posiciona a mão diante da câmera.
-2. O MediaPipe realiza o rastreamento dos landmarks da mão.
-3. O sistema interpreta os gestos definidos.
-4. A aplicação Qt atualiza a interface conforme a interação.
-5. Uma senha é gerada e enviada ao ESP32-C3 pela comunicação serial.
-6. O ESP32-C3 transmite a senha via Bluetooth Low Energy.
-7. O smartphone recebe a senha para exibição à equipe de atendimento.
+- reconhecer gestos da mão em tempo real;
+- permitir navegação em uma interface gráfica;
+- gerar senhas automaticamente;
+- transmitir as senhas para um painel de atendimento;
+- integrar visão computacional, software desktop e sistemas embarcados.
 
 ---
 
-## Tecnologias Utilizadas
+# Arquitetura do Sistema
 
-### Software
+O sistema é composto pelos seguintes módulos:
 
-* Python
-* MediaPipe
-* OpenCV
-* PyAutoGUI
-* Qt Creator
-* Qt Widgets
-* Qt Serial Port
-* CMake
-* PlatformIO
-* Visual Studio Code
+| Módulo | Tecnologia |
+|----------|----------|
+| Reconhecimento de Gestos | MediaPipe + OpenCV |
+| Interface Gráfica | Qt |
+| Comunicação Serial | Qt Serial Port |
+| Sistema Embarcado | ESP32-C3 Super Mini |
+| Comunicação Sem Fio | Bluetooth Low Energy (BLE) |
+| Painel da Equipe | Smartphone |
 
-### Hardware
+## Fluxo de Funcionamento
 
-* ESP32-C3 Super Mini
-* Cabo USB-C
-* Smartphone com BLE
-* Webcam
+1. A câmera captura a mão do usuário.
+2. O MediaPipe realiza o rastreamento dos landmarks.
+3. Os gestos são interpretados pelo software.
+4. A interface Qt atualiza as opções exibidas.
+5. O usuário confirma a seleção através de gestos.
+6. A aplicação gera uma senha.
+7. A senha é enviada ao ESP32-C3 via comunicação serial.
+8. O ESP32-C3 transmite a senha utilizando BLE.
+9. O smartphone recebe a senha para atendimento.
 
 ---
 
-## Estrutura do Projeto
+# Tecnologias Utilizadas
+
+## Visão Computacional
+
+- Python
+- MediaPipe
+- OpenCV
+- PyAutoGUI
+
+## Interface Gráfica
+
+- Qt Creator
+- Qt Widgets
+- Qt Serial Port
+- CMake
+- C++
+
+## Sistemas Embarcados
+
+- ESP32-C3 Super Mini
+- Bluetooth Low Energy (BLE)
+- PlatformIO
+- Arduino Framework
+
+## Ferramentas de Desenvolvimento
+
+- Visual Studio Code
+- GitHub
+
+---
+
+# Estrutura do Projeto
 
 ```text
 ProjetoIntegrador/
 │
-├── qt/
+├── Qt/
+│   ├── ESP32Manager.cpp
+│   ├── ESP32Manager.h
 │   ├── main.cpp
 │   ├── mainwindow.cpp
 │   ├── mainwindow.h
-│   ├── mainwindow.ui
-│   ├── ESP32Manager.cpp
-│   └── ESP32Manager.h
+│   └── mainwindow.ui
 │
 ├── visao_computacional/
 │   └── sensormao.py
 │
-├── firmware/
+├── firmwaremacos/
+│   └── main.cpp
+│
+├── firmwarewindows/
 │   └── main.cpp
 │
 ├── docs/
-│   ├── PC1
-│   ├── PC2
-│   ├── PC3
-│   └── PC4
+│   ├── PC1/
+│   ├── PC2/
+│   ├── PC3/
+│   ├── PC4/
+│   └── referencias/
 │
 ├── imagens/
 │
@@ -101,9 +114,49 @@ ProjetoIntegrador/
 
 ---
 
-## Como Executar o Sistema
+# Descrição dos Diretórios
 
-### 1. Aplicação de Visão Computacional
+## Qt
+
+Contém toda a aplicação gráfica desenvolvida em Qt, incluindo a interface principal, gerenciamento da comunicação serial com o ESP32-C3 e a lógica de geração de senhas.
+
+## visao_computacional
+
+Implementação do reconhecimento de gestos utilizando MediaPipe e OpenCV através do arquivo `sensormao.py`.
+
+## firmwaremacos
+
+Firmware utilizado para integração do ESP32-C3 em ambiente macOS.
+
+## firmwarewindows
+
+Firmware utilizado para integração do ESP32-C3 em ambiente Windows.
+
+## docs
+
+Documentação produzida ao longo do Projeto Integrador, incluindo as entregas PC1, PC2, PC3 e PC4, além das referências bibliográficas.
+
+## imagens
+
+Capturas de tela, registros experimentais e evidências de funcionamento utilizadas na documentação do projeto.
+
+---
+
+# Componentes Utilizados
+
+| Componente | Função |
+|------------|---------|
+| ESP32-C3 Super Mini | Comunicação embarcada e BLE |
+| Webcam | Captura dos gestos |
+| Smartphone | Recebimento das senhas |
+| Cabo USB-C | Alimentação e comunicação serial |
+| Computador | Execução da interface Qt e visão computacional |
+
+---
+
+# Como Executar
+
+## 1. Aplicação de Visão Computacional
 
 Instale as dependências:
 
@@ -119,31 +172,26 @@ python sensormao.py
 
 ---
 
-### 2. Aplicação Qt
+## 2. Aplicação Qt
 
 Abra o projeto no Qt Creator.
 
 Compile utilizando:
 
-```bash
-CMake
+```text
 Qt 6
+CMake
 ```
 
-Execute a aplicação.
+Execute a aplicação principal.
 
 ---
 
-### 3. Firmware ESP32-C3
+## 3. Firmware ESP32-C3
 
-Abra o projeto no PlatformIO.
+Abra o projeto utilizando PlatformIO.
 
-Configure a porta correta no arquivo:
-
-```ini
-upload_port = COMx
-monitor_port = COMx
-```
+Configure a porta serial correta no arquivo `platformio.ini`.
 
 Compile e envie o firmware:
 
@@ -159,9 +207,9 @@ Abra o Monitor Serial:
 
 ---
 
-## Comunicação Bluetooth
+# Comunicação Bluetooth
 
-O ESP32-C3 opera como dispositivo BLE.
+O ESP32-C3 opera como dispositivo Bluetooth Low Energy.
 
 Nome do dispositivo:
 
@@ -169,48 +217,71 @@ Nome do dispositivo:
 Painel_Equipe_ESP32
 ```
 
-As senhas recebidas pela aplicação Qt são retransmitidas para o smartphone através do BLE.
+A aplicação Qt envia a senha ao ESP32-C3 através da porta serial.
+
+O ESP32-C3 retransmite a senha para o smartphone utilizando Bluetooth Low Energy.
 
 ---
 
-## Resultados Obtidos
+# Resultados Obtidos
 
-O sistema atualmente apresenta:
+Durante os testes realizados, o sistema apresentou:
 
-* reconhecimento de gestos utilizando MediaPipe;
-* rastreamento da mão em tempo real;
-* navegação sem contato físico;
-* geração automática de senhas;
-* interface gráfica funcional em Qt;
-* comunicação serial entre Qt e ESP32;
-* transmissão das senhas via Bluetooth Low Energy;
-* recebimento correto das informações no smartphone.
+- reconhecimento de gestos utilizando MediaPipe;
+- rastreamento da mão em tempo real;
+- navegação sem contato físico;
+- geração automática de senhas;
+- interface gráfica funcional em Qt;
+- comunicação serial entre Qt e ESP32;
+- transmissão das senhas via BLE;
+- recebimento correto das informações no smartphone;
+- integração funcional entre software e hardware.
+
+### Desempenho Experimental
+
+| Parâmetro | Resultado |
+|------------|------------|
+| Taxa média de reconhecimento dos gestos | Superior a 90% |
+| Tempo médio de resposta | 0,82 s |
+| Menor tempo observado | 0,61 s |
+| Maior tempo observado | 1,07 s |
+| Distância máxima confiável de detecção | 80 cm |
 
 ---
 
-## Evidências
+# Evidências
 
 O repositório contém registros de:
 
-* funcionamento do MediaPipe;
-* integração com Qt;
-* monitor serial do ESP32-C3;
-* comunicação BLE;
-* testes experimentais realizados durante o desenvolvimento.
+- detecção da mão utilizando MediaPipe;
+- funcionamento da interface Qt;
+- monitor serial do ESP32-C3;
+- comunicação Bluetooth Low Energy;
+- recebimento das senhas pelo smartphone;
+- documentação técnica do projeto;
+- relatórios PC1, PC2, PC3 e PC4.
 
 ---
 
-## Equipe
+# Repositório
 
-* Letícia Lavigne Guedes Germano
-* Pedro Henrique Alves Castello Branco
-* Kauã da Silva Araújo
-* Iuri Costa Mariante
-* João Gabriel de Souza
-* Cauê Lovis Santana
+O código-fonte e toda a documentação do projeto estão disponíveis em:
+
+**https://github.com/Leticialah/ProjetoIntegrador**
 
 ---
 
-## Licença
+# Equipe
+
+- Letícia Lavigne Guedes Germano
+- Pedro Henrique Alves Castello Branco
+- Kauã da Silva Araújo
+- Iuri Costa Mariante
+- João Gabriel de Souza
+- Cauê Lovis Santana
+
+---
+
+# Licença
 
 Projeto acadêmico desenvolvido exclusivamente para fins educacionais e de pesquisa.
